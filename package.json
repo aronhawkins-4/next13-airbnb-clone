@@ -14,6 +14,7 @@
     "@types/node": "20.1.1",
     "@types/react": "18.2.6",
     "@types/react-dom": "18.2.4",
+    "@uploadthing/react": "^3.0.1",
     "autoprefixer": "10.4.14",
     "axios": "^1.4.0",
     "bcrypt": "^5.1.0",
@@ -29,6 +30,7 @@
     "query-string": "^8.1.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-dropzone": "^14.2.3",
     "react-hook-form": "^7.43.9",
     "react-hot-toast": "^2.4.1",
     "react-icons": "^4.8.0",
@@ -36,6 +38,7 @@
     "react-select": "^5.7.3",
     "tailwindcss": "3.3.2",
     "typescript": "5.0.4",
+    "uploadthing": "^3.0.1",
     "world-countries": "^4.0.0",
     "zustand": "^4.3.8"
   },
