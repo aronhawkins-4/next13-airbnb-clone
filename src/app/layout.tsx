@@ -8,29 +8,29 @@ import getCurrentUser from './actions/getCurrentUser';
 import { RentModal } from './components/modals/RentModal';
 
 export const metadata = {
-    title: 'Airbnb',
-    description: 'Airbnb clone',
+	title: 'Airbnb',
+	description: 'Airbnb clone',
 };
 
 const font = Nunito({
-    subsets: ['latin'],
+	subsets: ['latin'],
 });
 export default async function RootLayout({
-    children,
+	children,
 }: {
-    children: React.ReactNode;
+	children: React.ReactNode;
 }) {
-    const currentUser = await getCurrentUser();
-    return (
-        <html lang="en">
-            <body className={font.className}>
-                <Toaster />
-                <RentModal />
-                <LoginModal />
-                <RegisterModal />
-                <Navbar currentUser={currentUser} />
-                {children}
-            </body>
-        </html>
-    );
+	const currentUser = await getCurrentUser();
+	return (
+		<html lang='en'>
+			<body className={font.className}>
+				<Toaster />
+				<RentModal />
+				<LoginModal />
+				<RegisterModal />
+				<Navbar currentUser={currentUser} />
+				<div className='pb-20 pt-28'>{children}</div>
+			</body>
+		</html>
+	);
 }
