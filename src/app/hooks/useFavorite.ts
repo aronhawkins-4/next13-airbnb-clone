@@ -22,22 +22,18 @@ export const useFavorite = ({ listingId, currentUser }: IUseFavorite) => {
 	const toggleFavorite = useCallback(
 		async (e: React.MouseEvent<HTMLDivElement>) => {
 			e.stopPropagation();
-			if (!currentUser) return loginModel.onOpen();
+			if (!currentUser) {
+				return loginModel.onOpen();
+			}
 
 			try {
 				let request;
 				if (hasFavorited) {
-					request = () => {
-						axios.delete(`/api/favorites/${listingId}`);
-					};
+					request = () => axios.delete(`/api/favorites/${listingId}`);
 				} else {
-					request = () => {
-						axios.delete(`api/favorites/${listingId}`);
-					};
+					request = () => axios.post(`/api/favorites/${listingId}`);
 				}
 				await request();
-				router.refresh();
-				toast.success('Success');
 			} catch (error) {
 				toast.error('Something went wrong');
 			}

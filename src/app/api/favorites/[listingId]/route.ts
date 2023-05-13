@@ -11,15 +11,14 @@ export async function POST(request: Request, { params }: { params: IParams }) {
 	if (!currentUser) {
 		return NextResponse.error();
 	}
-	const listingId = params;
-
+	const listingId = params.listingId;
 	if (!listingId || typeof listingId !== 'string') {
 		throw new Error('Invalid ID');
 	}
 	let favoriteIds = [...(currentUser.favoriteIds || [])];
-	favoriteIds.push(listingId);
 
-	const user = prisma.user.update({
+	favoriteIds.push(listingId);
+	const user = await prisma.user.update({
 		where: {
 			id: currentUser.id,
 		},
@@ -38,13 +37,13 @@ export async function DELETE(
 	if (!currentUser) {
 		return NextResponse.error();
 	}
-	const listingId = params;
+	const listingId = params.listingId;
 	if (!listingId || typeof listingId !== 'string') {
 		throw new Error('Invalid ID');
 	}
 	let favoriteIds = [...(currentUser.favoriteIds || [])];
 	favoriteIds = favoriteIds.filter((id) => id !== listingId);
-	const user = prisma.user.update({
+	const user = await prisma.user.update({
 		where: {
 			id: currentUser.id,
 		},
