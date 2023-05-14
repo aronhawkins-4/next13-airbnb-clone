@@ -30,7 +30,6 @@ export const ListingCard: React.FC<ListingCardProps> = ({
 	actionId = '',
 	currentUser,
 }) => {
-	const router = useRouter();
 	const { getByValue } = useCountries();
 	const location = getByValue(data.locationValue);
 	const handleCancel = useCallback(
@@ -65,7 +64,7 @@ export const ListingCard: React.FC<ListingCardProps> = ({
 			href={`/listings/${data.id}`}
 			className='col-span-1 cursor-pointer group'
 		>
-			<div className='flex flex-col gap-2 w-full'>
+			<div className='flex flex-col gap-1 w-full'>
 				<div className='aspect-square w-full relative overflow-hidden rounded-xl'>
 					<Image
 						alt='Listing'

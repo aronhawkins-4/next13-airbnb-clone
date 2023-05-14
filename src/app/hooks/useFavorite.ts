@@ -34,6 +34,7 @@ export const useFavorite = ({ listingId, currentUser }: IUseFavorite) => {
 					request = () => axios.post(`/api/favorites/${listingId}`);
 				}
 				await request();
+				router.refresh();
 			} catch (error) {
 				toast.error('Something went wrong');
 			}
