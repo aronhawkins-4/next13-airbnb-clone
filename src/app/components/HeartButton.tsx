@@ -15,19 +15,16 @@ export const HeartButton: React.FC<HeartButtonProps> = ({
 	listingId,
 	currentUser,
 }) => {
-	const { toggleFavorite } = useFavorite({
+	const { toggleFavorite, hasFavorited } = useFavorite({
 		listingId,
 		currentUser,
 	});
-	const [isFavorite, setIsFavorite] = useState<boolean>();
-
 	return (
 		<div
 			onClick={(e) => {
 				try {
 					e.preventDefault();
 					toggleFavorite(e);
-					setIsFavorite((value) => !value);
 				} catch (error) {
 					toast.error('Something went wrong');
 				}
@@ -40,7 +37,9 @@ export const HeartButton: React.FC<HeartButtonProps> = ({
 			/>
 			<AiFillHeart
 				size={24}
-				className={isFavorite ? 'fill-rose-500' : 'fill-neutral-500/70'}
+				className={
+					hasFavorited ? 'fill-rose-500' : 'fill-neutral-500/70'
+				}
 			/>
 		</div>
 	);
