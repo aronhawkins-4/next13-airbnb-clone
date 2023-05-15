@@ -1,17 +1,8 @@
 'use client';
-import { AiFillGithub } from 'react-icons/ai';
-import { FcGoogle } from 'react-icons/fc';
+
 import { useCallback, useState, useMemo } from 'react';
-import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
-import { useRegisterModal } from '@/app/hooks/useRegisterModal';
-import axios from 'axios';
 import { Modal } from './Modal';
 import { Heading } from '../Heading';
-import { Input } from '../inputs/Input';
-import { toast } from 'react-hot-toast';
-import { Button } from '../Button';
-import { signIn } from 'next-auth/react';
-import { useLoginModal } from '@/app/hooks/useLoginModal';
 import { useSearchModal } from '@/app/hooks/useSearchModal';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Range } from 'react-date-range';
@@ -20,6 +11,7 @@ import { CountrySelect, CountrySelectValue } from '../inputs/CountrySelect';
 import qs from 'query-string';
 import { Calendar } from '../inputs/Calendar';
 import { Counter } from '../inputs/Counter';
+import { formatISO } from 'date-fns';
 
 enum STEPS {
 	LOCATION = 0,
@@ -71,6 +63,13 @@ export const SearchModal = () => {
 			roomCount,
 			bathroomCount,
 		};
+		if (dateRange.startDate) {
+			updatedQuery.startDate = formatISO(dateRange.startDate);
+		}
+
+		if (dateRange.endDate) {
+			updatedQuery.endDate = formatISO(dateRange.endDate);
+		}
 		const url = qs.stringifyUrl(
 			{
 				url: '/',
@@ -140,34 +139,34 @@ export const SearchModal = () => {
 		);
 	}
 
-	// if (step === STEPS.INFO) {
-	// 	bodyContent = (
-	// 		<div className='flex flex-col gap-8'>
-	// 			<Heading
-	// 				title='More information'
-	// 				subtitle='Find your perfect place!'
-	// 			/>
-	// 			<Counter
-	// 				title='Guests'
-	// 				subtitle='How many guests are coming?'
-	// 				value={guestCount}
-	// 				onChange={(value) => setGuestCount(value)}
-	// 			/>
-	// 			<Counter
-	// 				title='Rooms'
-	// 				subtitle='How many rooms do you need?'
-	// 				value={roomCount}
-	// 				onChange={(value) => setRoomCount(value)}
-	// 			/>
-	// 			<Counter
-	// 				title='Bathrooms'
-	// 				subtitle='How many bathrooms do you need?'
-	// 				value={bathroomCount}
-	// 				onChange={(value) => setBathroomCount(value)}
-	// 			/>
-	// 		</div>
-	// 	);
-	// }
+	if (step === STEPS.INFO) {
+		bodyContent = (
+			<div className='flex flex-col gap-8'>
+				<Heading
+					title='More information'
+					subtitle='Find your perfect place!'
+				/>
+				<Counter
+					title='Guests'
+					subtitle='How many guests are coming?'
+					value={guestCount}
+					onChange={(value) => setGuestCount(value)}
+				/>
+				<Counter
+					title='Rooms'
+					subtitle='How many rooms do you need?'
+					value={roomCount}
+					onChange={(value) => setRoomCount(value)}
+				/>
+				<Counter
+					title='Bathrooms'
+					subtitle='How many bathrooms do you need?'
+					value={bathroomCount}
+					onChange={(value) => setBathroomCount(value)}
+				/>
+			</div>
+		);
+	}
 	return (
 		<Modal
 			isOpen={searchModal.isOpen}

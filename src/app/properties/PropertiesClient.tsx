@@ -1,6 +1,6 @@
 'use client';
 
-import { Reservation, User, Listing } from '@prisma/client';
+import { Listing } from '@prisma/client';
 import { SafeUser } from '../types';
 import { Container } from '../components/Container';
 import { Heading } from '../components/Heading';

@@ -8,17 +8,9 @@ const nextConfig = {
         ]
     },
     webpack: (config) => {
-      config.resolve = {
-        ...config.resolve,
-        fallback: {
-          "fs": false,
-          "path": false,
-          "os": false,
-          "child_process": false
-        }
-      }
-      return config
-    },
+      config.externals = [...config.externals, 'bcrypt'];
+      return config;
+ },
 }
 
 module.exports = nextConfig
