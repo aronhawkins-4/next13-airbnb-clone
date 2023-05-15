@@ -14,3 +14,6 @@ body,
 .leaflet-top {
 	z-index: 0 !;
 }
+.rdrMonth {
+	width: 100% !important;
+}
